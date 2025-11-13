@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Autenticación</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Sistema de Autenticación</h1>
+        
+        <!-- Pantalla inicial con botones -->
+        <div class="initial-screen" id="initialScreen">
+            <h2>Bienvenido</h2>
+            <p>¿Qué deseas hacer?</p>
+            <button onclick="showForm('register')">Registrarse</button>
+            <button onclick="showForm('login')">Iniciar Sesión</button>
+        </div>
+
+        <!-- Formulario de Registro -->
+        <div class="form-container hidden" id="registerFormContainer">
+            <h2>Crear Cuenta</h2>
+            <form id="registerForm">
+                <input type="text" id="regUsername" placeholder="Usuario" required>
+                <input type="email" id="regEmail" placeholder="Email" required>
+                <div class="password-container">
+                    <input type="password" id="regPassword" placeholder="Contraseña" required>
+                    <span class="toggle-password" onclick="togglePassword('regPassword')">
+                        👁️
+                    </span>
+                </div>
+                <div class="form-buttons">
+                    <button type="submit">Registrarse</button>
+                    <button type="button" onclick="showInitialScreen()">Volver</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Formulario de Login -->
+        <div class="form-container hidden" id="loginFormContainer">
+            <h2>Iniciar Sesión</h2>
+            <p class="login-info">Puedes usar tu usuario O tu email</p>
+            <form id="loginForm">
+                <input type="text" id="loginUsernameOrEmail" placeholder="Usuario o Email" required>
+                <div class="password-container">
+                    <input type="password" id="loginPassword" placeholder="Contraseña" required>
+                    <span class="toggle-password" onclick="togglePassword('loginPassword')">
+                        👁️
+                    </span>
+                </div>
+                <div class="form-buttons">
+                    <button type="submit">Iniciar Sesión</button>
+                    <button type="button" onclick="showInitialScreen()">Volver</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Área de perfil (solo visible cuando está logueado) -->
+        <div class="profile-container hidden" id="profileContainer">
+            <h2>Perfil de Usuario</h2>
+            <div id="profileInfo"></div>
+            <button onclick="logout()">Cerrar Sesión</button>
+        </div>
+
+        <!-- Mensajes de respuesta -->
+        <div id="message" class="message hidden"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

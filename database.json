@@ -1,0 +1,39 @@
+{
+  "users": [
+    {
+      "id": "1763008967612",
+      "username": "Vero",
+      "email": "veroblazquezc@gmail.com",
+      "password": "$2a$10$NnPqZ2r4aixyW/l37L1BZ.yLONzHfqAAdFS/gFkFA5lBABS4fUMxW",
+      "createdAt": "2025-11-13T04:42:47.612Z"
+    },
+    {
+      "id": "1763009765182",
+      "username": "Eduardo123",
+      "email": "edurey@gmail.com",
+      "password": "$2a$10$LrTAPnGzYz3IxSTYaEaSPuXRJF06LbA5QzEn3jHbM8ryg1PmHMVQi",
+      "createdAt": "2025-11-13T04:56:05.182Z"
+    },
+    {
+      "id": "1763010447369",
+      "username": "maria",
+      "email": "maria@test.com",
+      "password": "$2a$10$AekfFSbdb/ZeEy7Vm/BSTOBtxtyTrRqn4HCtc77vDbTZFJNGWFHO.",
+      "createdAt": "2025-11-13T05:07:27.369Z"
+    },
+    {
+      "id": "1763066424759",
+      "username": "michelle",
+      "email": "bmichelle@gmail.com",
+      "password": "$2a$10$gOTQJzDO1B/MrYRVAgjJ3O4Q6p.PEzL6BTVCkKe37nwoE8Ypu1Ki2",
+      "createdAt": "2025-11-13T20:40:24.759Z"
+    },
+    {
+      "id": "1763071829993",
+      "username": "Miguel",
+      "email": "mabc@gmail.com",
+      "password": "$2a$10$Ke4LjMJJoC15aPUXPWYRYO63mukKElHLxVu.MviasjcHJsA27QcWi",
+      "createdAt": "2025-11-13T22:10:29.993Z"
+    }
+  ]
+}
