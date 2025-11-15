@@ -13,7 +13,6 @@ class User {
     this.createdAt = new Date().toISOString();
   }
 
-  // Leer todos los usuarios
   static async findAll() {
     try {
       const data = fs.readFileSync(dbPath, 'utf8');
@@ -23,29 +22,24 @@ class User {
     }
   }
 
-  // Buscar usuario por email
   static async findByEmail(email) {
     const users = await this.findAll();
     return users.find(user => user.email === email);
   }
 
-  // Buscar usuario por username
   static async findByUsername(username) {
     const users = await this.findAll();
     return users.find(user => user.username === username);
   }
 
-  // Buscar usuario por ID
   static async findById(id) {
     const users = await this.findAll();
     return users.find(user => user.id === id);
   }
 
-  // Guardar usuario
   async save() {
     const users = await User.findAll();
     
-    // Hash password
     const salt = await bcrypt.genSalt(10);
     this.password = await bcrypt.hash(this.password, salt);
     
@@ -59,7 +53,6 @@ class User {
     return this;
   }
 
-  // Comparar password
   async comparePassword(candidatePassword) {
     return await bcrypt.compare(candidatePassword, this.password);
   }

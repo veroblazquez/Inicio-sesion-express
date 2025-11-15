@@ -1,6 +1,5 @@
 const API_URL = 'http://localhost:3000/api/auth';
 
-// Elementos del DOM
 const initialScreen = document.getElementById('initialScreen');
 const registerFormContainer = document.getElementById('registerFormContainer');
 const loginFormContainer = document.getElementById('loginFormContainer');
@@ -10,7 +9,6 @@ const messageDiv = document.getElementById('message');
 const registerForm = document.getElementById('registerForm');
 const loginForm = document.getElementById('loginForm');
 
-// Función para mostrar/ocultar contraseña
 function togglePassword(passwordFieldId) {
     const passwordField = document.getElementById(passwordFieldId);
     const toggleIcon = document.querySelector(`[onclick="togglePassword('${passwordFieldId}')"]`);
@@ -26,7 +24,6 @@ function togglePassword(passwordFieldId) {
     }
 }
 
-// Mostrar mensajes
 function showMessage(message, type = 'success') {
     messageDiv.textContent = message;
     messageDiv.className = `message ${type}`;
@@ -37,7 +34,6 @@ function showMessage(message, type = 'success') {
     }, 5000);
 }
 
-// Mostrar pantalla inicial
 function showInitialScreen() {
     initialScreen.classList.remove('hidden');
     registerFormContainer.classList.add('hidden');
@@ -45,15 +41,12 @@ function showInitialScreen() {
     profileContainer.classList.add('hidden');
     messageDiv.classList.add('hidden');
     
-    // Limpiar formularios
     registerForm.reset();
     loginForm.reset();
     
-    // Asegurar que las contraseñas estén ocultas
     document.getElementById('regPassword').type = 'password';
     document.getElementById('loginPassword').type = 'password';
     
-    // Resetear iconos de ojito
     const toggleIcons = document.querySelectorAll('.toggle-password');
     toggleIcons.forEach(icon => {
         icon.textContent = '👁️';
@@ -61,7 +54,6 @@ function showInitialScreen() {
     });
 }
 
-// Mostrar formulario específico
 function showForm(formType) {
     initialScreen.classList.add('hidden');
     messageDiv.classList.add('hidden');
@@ -75,7 +67,6 @@ function showForm(formType) {
     }
 }
 
-// Registrar usuario
 registerForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     
@@ -99,7 +90,6 @@ registerForm.addEventListener('submit', async (e) => {
         if (response.ok) {
             showMessage('¡Usuario registrado exitosamente!');
             registerForm.reset();
-            // Guardar token y mostrar perfil
             localStorage.setItem('token', data.token);
             loadUserProfile();
         } else {
@@ -110,19 +100,16 @@ registerForm.addEventListener('submit', async (e) => {
     }
 });
 
-// Login de usuario
 loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     
     const usernameOrEmail = document.getElementById('loginUsernameOrEmail').value;
     const password = document.getElementById('loginPassword').value;
 
-    // Determinar si es username o email
     const loginData = {
         password: password
     };
 
-    // Verificar si es email (contiene @) o username
     if (usernameOrEmail.includes('@')) {
         loginData.email = usernameOrEmail;
     } else {
@@ -143,7 +130,6 @@ loginForm.addEventListener('submit', async (e) => {
         if (response.ok) {
             showMessage('¡Login exitoso!');
             loginForm.reset();
-            // Guardar token y mostrar perfil
             localStorage.setItem('token', data.token);
             loadUserProfile();
         } else {
@@ -154,7 +140,6 @@ loginForm.addEventListener('submit', async (e) => {
     }
 });
 
-// Cargar perfil de usuario
 async function loadUserProfile() {
     const token = localStorage.getItem('token');
     
@@ -183,7 +168,6 @@ async function loadUserProfile() {
     }
 }
 
-// Función para calcular cuánto tiempo ha pasado desde el registro
 function timeSince(date) {
     const now = new Date();
     const seconds = Math.floor((now - date) / 1000);
@@ -211,14 +195,12 @@ function timeSince(date) {
     return Math.floor(seconds) + " segundos";
 }
 
-// Mostrar información del perfil
 function showProfile(user) {
     initialScreen.classList.add('hidden');
     registerFormContainer.classList.add('hidden');
     loginFormContainer.classList.add('hidden');
     profileContainer.classList.remove('hidden');
     
-    // Formatear la fecha y hora de registro
     const registrationDate = new Date(user.createdAt);
     const formattedDate = registrationDate.toLocaleDateString('es-ES', {
         year: 'numeric',
@@ -241,14 +223,12 @@ function showProfile(user) {
     `;
 }
 
-// Cerrar sesión
 function logout() {
     localStorage.removeItem('token');
     showMessage('Sesión cerrada correctamente');
     showInitialScreen();
 }
 
-// Verificar si hay token al cargar la página
 document.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('token');
     if (token) {

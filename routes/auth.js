@@ -5,12 +5,10 @@ const { authMiddleware, JWT_SECRET } = require('../middleware/auth');
 
 const router = express.Router();
 
-// Registro de usuario
 router.post('/register', async (req, res) => {
   try {
     const { username, email, password } = req.body;
 
-    // Validaciones básicas
     if (!username || !email || !password) {
       return res.status(400).json({ 
         message: 'Todos los campos son requeridos' 
@@ -29,7 +27,6 @@ router.post('/register', async (req, res) => {
       });
     }
 
-    // Verificar si el usuario ya existe
     const existingUserByEmail = await User.findByEmail(email);
     const existingUserByUsername = await User.findByUsername(username);
 
@@ -39,11 +36,9 @@ router.post('/register', async (req, res) => {
       });
     }
 
-    // Crear nuevo usuario
     const user = new User(username, email, password);
     await user.save();
 
-    // Generar token JWT
     const token = jwt.sign(
       { userId: user.id, username: user.username },
       JWT_SECRET,
@@ -66,12 +61,10 @@ router.post('/register', async (req, res) => {
   }
 });
 
-// Login de usuario - Ahora acepta usuario O email
 router.post('/login', async (req, res) => {
   try {
     const { username, email, password } = req.body;
 
-    // Validar que se proporcione usuario o email (pero no ambos)
     if ((!username && !email) || (username && email)) {
       return res.status(400).json({ 
         message: 'Proporciona solo usuario O email, no ambos' 
@@ -86,7 +79,6 @@ router.post('/login', async (req, res) => {
 
     let user;
 
-    // Buscar usuario por username o email
     if (username) {
       user = await User.findByUsername(username);
     } else {
@@ -99,7 +91,6 @@ router.post('/login', async (req, res) => {
       });
     }
 
-    // Verificar contraseña
     const userInstance = new User(user.username, user.email, user.password);
     userInstance.id = user.id;
     
@@ -110,7 +101,6 @@ router.post('/login', async (req, res) => {
       });
     }
 
-    // Generar token JWT
     const token = jwt.sign(
       { userId: user.id, username: user.username },
       JWT_SECRET,
@@ -133,7 +123,6 @@ router.post('/login', async (req, res) => {
   }
 });
 
-// Obtener perfil de usuario (protegido)
 router.get('/profile', authMiddleware, async (req, res) => {
   try {
     res.json({
@@ -150,7 +139,6 @@ router.get('/profile', authMiddleware, async (req, res) => {
   }
 });
 
-// Verificar token
 router.get('/verify', authMiddleware, (req, res) => {
   res.json({ 
     valid: true, 

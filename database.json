@@ -34,6 +34,13 @@
       "email": "mabc@gmail.com",
       "password": "$2a$10$Ke4LjMJJoC15aPUXPWYRYO63mukKElHLxVu.MviasjcHJsA27QcWi",
       "createdAt": "2025-11-13T22:10:29.993Z"
+    },
+    {
+      "id": "1763157667484",
+      "username": "eduardor",
+      "email": "edu@gmail.com",
+      "password": "$2a$10$xOytasmoOCq0yIlOJs.AVOWYF0XOZYLZdxKsxl83KRyagFLUxgolC",
+      "createdAt": "2025-11-14T22:01:07.484Z"
     }
   ]
 }
